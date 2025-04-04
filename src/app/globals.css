@@ -1,19 +1,170 @@
-@import "tailwindcss";
+
+/* global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can also add your own custom styles below if needed */
+body {
+  font-family: sans-serif;
+}
 
 :root {
   --background: black;
   --foreground: #171717;
+  --text-color: #ffffff;
+  --node-text-color: #e0e0e0;
+  --hierarchy-bg: #171717;
+  --button-bg: #0d6efd;
+  --button-hover: #0b5ed7;
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: black;
+    --text-color: #ffffff;
+    --node-text-color: #e0e0e0;
+    --hierarchy-bg: #171717;
+    --button-bg: #0d6efd;
+    --button-hover: #0b5ed7;
+    --shadow-color: rgba(0, 0, 0, 0.3);
   }
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--text-color);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Employee Hierarchy Styles */
+.employee-hierarchy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Page title */
+.employee-hierarchy-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--text-color);
+}
+
+/* Add Position button */
+.add-position-button {
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-position-button:hover {
+  background-color: var(--button-hover);
+}
+
+/* Header section with title and button */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Tree container */
+.hierarchy-tree {
+  background-color: var(--hierarchy-bg);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+/* Tree node styles */
+.tree-node {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Indentation for hierarchy levels */
+.level-0 { margin-left: 0; }
+.level-1 { margin-left: 20px; }
+.level-2 { margin-left: 40px; }
+.level-3 { margin-left: 60px; }
+.level-4 { margin-left: 80px; }
+.level-5 { margin-left: 100px; }
+
+/* Expand/collapse icons */
+.expand-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  color: var(--text-color);
+}
+
+.expanded .expand-icon {
+  transform: rotate(90deg);
+}
+
+/* Node text */
+.node-text {
+  font-size: 14px;
+  color: var(--node-text-color);
+}
+
+/* Leaf nodes (no children) */
+.leaf-node {
+  margin-left: 24px; /* Align with parent text */
+}
+
+/* Animation for expanding/collapsing */
+.children-container {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.collapsed + .children-container {
+  max-height: 0;
+}
+
+.expanded + .children-container {
+  max-height: 1000px; /* Adjust based on your content */
+}
+
+/* Hover effects */
+.node-text:hover {
+  color: var(--button-bg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .hierarchy-tree {
+    padding: 16px 12px;
+  }
+  
+  /* Reduce indentation on small screens */
+  .level-1 { margin-left: 16px; }
+  .level-2 { margin-left: 32px; }
+  .level-3 { margin-left: 48px; }
+  .level-4 { margin-left: 64px; }
+  .level-5 { margin-left: 80px; }
 }
